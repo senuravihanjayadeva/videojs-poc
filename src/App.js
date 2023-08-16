@@ -1,5 +1,6 @@
 import React from 'react';
 import SampleVideo from "./sample.mp4"
+import SampleImage from "./sample.jpeg"
 // This imports the functional component from the previous sample.
 import VideoJS from './components/VideoJS'
 
@@ -10,6 +11,13 @@ const App = () => {
     autoplay: true,
     controls: true,
     responsive: true,
+    poster:SampleImage,
+    playbackRates: [0.5, 1, 1.5, 2],
+    controlBar: {
+      skipButtons: {
+        backward: 10
+      }
+    },
     fluid: true,
     sources: [{
       src: SampleVideo,
@@ -31,11 +39,11 @@ const App = () => {
   };
 
   return (
-    <>
+    <div style={{padding: "10%"}}>
       <div>Rest of app here</div>
       <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
       <div>Rest of app here</div>
-    </>
+    </div>
   );
 }
 
