@@ -24,6 +24,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script src="http://localhost:3000/video.min.js"></script>
+    <script src="http://localhost:3000/videojs-chapters.min.js"></script>
     <title>React App</title>
   </head>
   <body>
@@ -39,5 +41,27 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      var player = videojs('my-video');
+    
+      var chaptersArray = [
+            {label: 'Chapter 1', time: '5'},
+            {label: 'Chapter 2', time: '10'},
+            {label: 'Chapter 3', time: '15'}
+          ];
+    
+      var chapterOptions = {
+            chapterType: 'horizontal',
+            chapters: chaptersArray,
+            styles: {
+              background: '#000',
+              color: '#aaa',
+              backgroundActive: '#333',
+              colorActive: '#fff'
+            }
+          }
+    
+      player.chapters(chapterOptions);
+    </script>
   </body>
 </html>
