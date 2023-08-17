@@ -5,7 +5,7 @@ export default function playlistPopup(player, playerRef, list) {
   // Create our button's DOM Component
   var myButtonDom = myButton.el();
 
-  myButtonDom.innerHTML = '<span class="vjs-icon-cancel"></span>';
+  myButtonDom.innerHTML = '<span class="vjs-icon-chapters"></span>';
 
   // Setting control text for the button hover effect
   myButton.controlText("My Cancel Button");

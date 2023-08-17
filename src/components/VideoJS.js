@@ -3,9 +3,11 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import customChapterList from "../plugins/custom-chapter-plugin";
 import "../plugins/custom-chapter-plugin.css";
+import customChaptersInSeekbar from "../plugins/custom-chapter-seekbar";
 import customPlaylist from "../plugins/playlist-plugin";
 import playlistPopup from "../plugins/playlist-popup-plugin";
 import "../plugins/playlist.css";
+import "../plugins/custom-chapter-seekbar.css";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
@@ -15,6 +17,8 @@ export const VideoJS = (props) => {
   useEffect(() => {
     //Register Custom Chapter Plugin
     videojs.registerPlugin("chapters", customChapterList);
+    //Register Custom Chapter Plugin
+    videojs.registerPlugin("customChaptersInSeekbar", customChaptersInSeekbar);
     //Register Custom Playlist Plugin
     videojs.registerPlugin("playlists", customPlaylist);
     //Register Custom Playlist Popup Plugin
@@ -38,9 +42,13 @@ export const VideoJS = (props) => {
       //Use Custom Chapter Plugin
       player.chapters(player, playerRef, options.chapters);
 
+      //Use Custom Chapter in Seekbar Plugin
+      player.customChaptersInSeekbar(player, options.chapters);
+
       //Use Custom Playlist Plugin
       player.playlists(player, playerRef, options.playlist);
 
+      //Use Custom Playlist Popup Plugin
       player.playlistPopup(player, playerRef, options.playlist);
     } else {
       const player = playerRef.current;

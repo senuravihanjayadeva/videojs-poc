@@ -10,6 +10,16 @@ const App = () => {
     {
       sources: [
         {
+          src: "http://media.w3.org/2010/05/video/movie_300.mp4",
+          type: "video/mp4",
+        },
+      ],
+      title: "Video Seven",
+      poster: SampleImage,
+    },
+    {
+      sources: [
+        {
           src: "http://techslides.com/demos/sample-videos/small.mp4",
           type: "video/mp4",
         },
@@ -67,25 +77,15 @@ const App = () => {
       title: "Video Six",
       poster: SampleImage,
     },
-    {
-      sources: [
-        {
-          src: "http://media.w3.org/2010/05/video/movie_300.mp4",
-          type: "video/mp4",
-        },
-      ],
-      title: "Video Seven",
-      poster: SampleImage,
-    },
   ];
   const chapters = [
     { label: "Chapter 1", time: "0" },
-    { label: "Chapter 2", time: "10" },
-    { label: "Chapter 3", time: "20" },
-    { label: "Chapter 4", time: "30" },
-    { label: "Chapter 5", time: "40" },
-    { label: "Chapter 6", time: "50" },
-    { label: "Chapter 7", time: "60" },
+    { label: "Chapter 2", time: "20" },
+    { label: "Chapter 3", time: "40" },
+    { label: "Chapter 4", time: "70" },
+    { label: "Chapter 5", time: "120" },
+    { label: "Chapter 6", time: "200" },
+    { label: "Chapter 7", time: "250" },
   ];
   const videoJsOptions = {
     playlist: playlist,
@@ -125,7 +125,7 @@ const App = () => {
   return (
     <div style={{ padding: "5% 10%" }}>
       <h3>Demo App - CloudFlicks</h3>
-      <hr/>
+      <hr />
       <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
     </div>
   );
