@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "videojs-playlist";
 import customChapterList from "../plugins/custom-chapter-plugin";
 import "../plugins/custom-chapter-plugin.css";
+import customPlaylist from "../plugins/playlist-plugin";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
@@ -11,8 +11,10 @@ export const VideoJS = (props) => {
   const { options, onReady } = props;
 
   useEffect(() => {
-    //Register Chapter Plugin
+    //Register Custom Chapter Plugin
     videojs.registerPlugin("chapters", customChapterList);
+    //Register Custom Playlist Plugin
+    videojs.registerPlugin("playlists", customPlaylist);
   }, []);
 
   useEffect(() => {
@@ -28,33 +30,12 @@ export const VideoJS = (props) => {
         onReady && onReady(player);
       }));
 
-      //Chapter Plugin
+      //Use Custom Chapter Plugin
       player.chapters(player, playerRef, options.chapters);
 
-      // Adding button to the control bar
-      var myButton = player.controlBar.addChild("button", {}, 0);
-
-      // Create our button's DOM Component
-      var myButtonDom = myButton.el();
-
-      myButtonDom.innerHTML = '<span class="vjs-icon-cancel"></span>';
-
-      // Setting control text for the button hover effect
-      myButton.controlText("My Cancel Button");
-
-      // Setting the control button click function
-      myButtonDom.onclick = function () {
-        alert("Cancel Button Clicked!");
-      };
-
-      // Add playlist functionality
-      player.playlist(options.playlist);
-
-      // Load the playlist
-      player.playlist.currentItem(0); // Start playing the first video in the playlist
-
-      // You could update an existing player in the `else` block here
-      // on prop change, for example:
+      //Use Custom Playlist Plugin
+      player.playlists(player, playerRef, options.playlist);
+      
     } else {
       const player = playerRef.current;
 
@@ -77,19 +58,6 @@ export const VideoJS = (props) => {
   return (
     <div data-vjs-player>
       <div ref={videoRef} />
-      <div>
-        <h3>Playlist</h3>
-        <ul>
-          {options.playlist.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => playerRef.current.playlist.currentItem(index)}
-            >
-              <h3>{item.title}</h3>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
