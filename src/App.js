@@ -80,12 +80,12 @@ const App = () => {
   ];
   const chapters = [
     { label: "Chapter 1", time: "0" },
-    { label: "Chapter 2", time: "5" },
-    { label: "Chapter 3", time: "10" },
-    { label: "Chapter 4", time: "15" },
-    { label: "Chapter 5", time: "20" },
-    { label: "Chapter 6", time: "25" },
-    { label: "Chapter 7", time: "30" },
+    { label: "Chapter 2", time: "10" },
+    { label: "Chapter 3", time: "20" },
+    { label: "Chapter 4", time: "30" },
+    { label: "Chapter 5", time: "40" },
+    { label: "Chapter 6", time: "50" },
+    { label: "Chapter 7", time: "60" },
   ];
   const videoJsOptions = {
     playlist: playlist,
@@ -123,10 +123,10 @@ const App = () => {
   };
 
   return (
-    <div style={{ padding: "10%" }}>
-      <div>Rest of app here</div>
+    <div style={{ padding: "5% 10%" }}>
+      <h3>Demo App - CloudFlicks</h3>
+      <hr/>
       <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-      <div>Rest of app here</div>
     </div>
   );
 };
