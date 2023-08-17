@@ -15,11 +15,16 @@ const App = () => {
           quality: "360p",
           chapters: [
             { label: "Chapter 1", time: "0" },
-            { label: "Chapter 2", time: "3" },
+            { label: "Chapter 2", time: "20" },
+            { label: "Chapter 3", time: "40" },
+            { label: "Chapter 4", time: "90" },
+            { label: "Chapter 5", time: "120" },
+            { label: "Chapter 6", time: "150" },
+            { label: "Chapter 7", time: "170" },
           ]
         },
       ],
-      title: "Video Seven",
+      title: "Video Intial",
       poster: SampleImage,
     },
     {

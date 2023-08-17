@@ -1,5 +1,12 @@
 export default function customChapterList(player, playerRef, chaptersArray) {
+  let prevSelectBoxContainer = document.getElementById(
+    "custom-select-container-playlist"
+  );
+  if (prevSelectBoxContainer) {
+    prevSelectBoxContainer.remove();
+  }
   const selectBoxContainer = document.createElement("div");
+  selectBoxContainer.id = "custom-select-container-playlist";
   selectBoxContainer.classList.add("custom-select-container");
   const selectBox = document.createElement("select");
 

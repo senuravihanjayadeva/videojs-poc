@@ -20,6 +20,9 @@ export default function customPlaylist(player, playerRef, list) {
 
   selectBox.onchange = function () {
     const selectedIndex = parseInt(this.value, 10);
+    if(list[selectedIndex].sources[0].chapters){
+      player.chapters(player, playerRef, list[selectedIndex].sources[0].chapters);
+    }
     playerRef.current.playlist.currentItem(selectedIndex)
   };
 
