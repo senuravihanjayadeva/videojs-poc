@@ -12,8 +12,8 @@
 }
 
 .chapter-marker:hover {
-  width: 12px; /* Enlarge width on hover */
-  height: 12px; /* Enlarge height on hover */
+  width: 14px; /* Enlarge width on hover */
+  height: 14px; /* Enlarge height on hover */
   background-color: #ff9800; /* Lighter orange color on hover */
   transform: translate(-50%, -50%) scale(1.5); /* Enlarge marker and maintain centered position */
 }
