@@ -1,8 +1,8 @@
 import React from "react";
-import SampleVideo from "./sample.mp4";
-import SampleImage from "./sample.jpeg";
-// This imports the functional component from the previous sample.
 import VideoJS from "./components/VideoJS";
+import SampleVideo360 from "./videos/sample360.mp4";
+import SampleVideo720 from "./videos/sample720.mp4";
+import SampleImage from "./sample.jpeg";
 
 const App = () => {
   const playerRef = React.useRef(null);
@@ -12,6 +12,11 @@ const App = () => {
         {
           src: "http://media.w3.org/2010/05/video/movie_300.mp4",
           type: "video/mp4",
+          quality: "360p",
+          chapters: [
+            { label: "Chapter 1", time: "0" },
+            { label: "Chapter 2", time: "3" },
+          ]
         },
       ],
       title: "Video Seven",
@@ -22,6 +27,11 @@ const App = () => {
         {
           src: "http://techslides.com/demos/sample-videos/small.mp4",
           type: "video/mp4",
+          quality: "360p",
+          chapters: [
+            { label: "Chapter 1", time: "0" },
+            { label: "Chapter 2", time: "3" },
+          ]
         },
       ],
       title: "Video One",
@@ -78,18 +88,9 @@ const App = () => {
       poster: SampleImage,
     },
   ];
-  const chapters = [
-    { label: "Chapter 1", time: "0" },
-    { label: "Chapter 2", time: "20" },
-    { label: "Chapter 3", time: "40" },
-    { label: "Chapter 4", time: "70" },
-    { label: "Chapter 5", time: "120" },
-    { label: "Chapter 6", time: "200" },
-    { label: "Chapter 7", time: "250" },
-  ];
+
   const videoJsOptions = {
-    // playlist: playlist,
-    // chapters: chapters,
+    playlist: playlist,
     autoplay: true,
     controls: true,
     responsive: true,
@@ -103,8 +104,32 @@ const App = () => {
     fluid: true,
     sources: [
       {
-        src: SampleVideo,
+        src: SampleVideo360,
         type: "video/mp4",
+        quality: "360p",
+        chapters: [
+          { label: "Chapter 1", time: "0" },
+          { label: "Chapter 2", time: "20" },
+          { label: "Chapter 3", time: "40" },
+          { label: "Chapter 4", time: "60" },
+          { label: "Chapter 5", time: "90" },
+          { label: "Chapter 6", time: "110" },
+          { label: "Chapter 7", time: "140" },
+        ]
+      },
+      {
+        src: SampleVideo720,
+        type: "video/mp4",
+        quality: "720p",
+        chapters: [
+          { label: "Chapter 1", time: "0" },
+          { label: "Chapter 2", time: "20" },
+          { label: "Chapter 3", time: "40" },
+          { label: "Chapter 4", time: "60" },
+          { label: "Chapter 5", time: "90" },
+          { label: "Chapter 6", time: "110" },
+          { label: "Chapter 7", time: "140" },
+        ]
       },
     ],
   };

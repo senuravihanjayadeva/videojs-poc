@@ -8,10 +8,6 @@ import customPlaylist from "../plugins/playlist-plugin";
 import playlistPopup from "../plugins/playlist-popup-plugin";
 import "../plugins/playlist.css";
 import "../plugins/custom-chapter-seekbar.css";
-
-
-import SampleVideo360 from "../videos/sample360.mp4";
-import SampleVideo720 from "../videos/sample720.mp4";
 import customVideoQualityChanger from "../plugins/video-quality-plugin";
 
 export const VideoJS = (props) => {
@@ -29,7 +25,10 @@ export const VideoJS = (props) => {
     //Register Custom Playlist Popup Plugin
     videojs.registerPlugin("playlistPopup", playlistPopup);
     //Register Custom Video Quality Change Plugin
-    videojs.registerPlugin("customVideoQualityChanger", customVideoQualityChanger);
+    videojs.registerPlugin(
+      "customVideoQualityChanger",
+      customVideoQualityChanger
+    );
   }, []);
 
   useEffect(() => {
@@ -47,35 +46,19 @@ export const VideoJS = (props) => {
       }));
 
       //Use Custom Chapter Plugin
-      //player.chapters(player, playerRef, options.chapters);
+      player.chapters(player, playerRef, options.sources[0].chapters);
 
       //Use Custom Chapter in Seekbar Plugin
-      //player.customChaptersInSeekbar(player, options.chapters);
-
+      player.customChaptersInSeekbar(player, options.sources[0].chapters);
+      
       //Use Custom Playlist Plugin
-      //player.playlists(player, playerRef, options.playlist);
+      player.playlists(player, playerRef, options.playlist);
 
       //Use Custom Playlist Popup Plugin
-      //player.playlistPopup(player, playerRef, options.playlist);
+      player.playlistPopup(player, playerRef, options.playlist);
 
-      const sources = [
-        {
-          "source": SampleVideo360,
-          "quality": "360p"
-        },
-        {
-          "source": SampleVideo720,
-          "quality": "720p"
-        }
-      ]
-      
-      player.customVideoQualityChanger(player, playerRef,sources)
-
-      // Add event listener to handle quality change
-      // player.on("resolutionchange", () => {
-      //   const currentResolution = player.currentResolution();
-      //   setSelectedQuality(currentResolution);
-      // });
+      //Use Custom Video Quality Plugin
+      player.customVideoQualityChanger(player, playerRef, options.sources);
     } else {
       const player = playerRef.current;
 

@@ -5,7 +5,7 @@ export default function customVideoQualityChanger(player, playerRef, sourceList)
 
   sourceList.forEach((option) => {
     const opt = document.createElement("option");
-    opt.value = option.source;
+    opt.value = option.src;
     opt.text = option.quality;
     selectBox.appendChild(opt);
   });
