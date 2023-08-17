@@ -88,8 +88,8 @@ const App = () => {
     { label: "Chapter 7", time: "250" },
   ];
   const videoJsOptions = {
-    playlist: playlist,
-    chapters: chapters,
+    // playlist: playlist,
+    // chapters: chapters,
     autoplay: true,
     controls: true,
     responsive: true,
