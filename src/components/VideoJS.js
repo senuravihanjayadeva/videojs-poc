@@ -1,13 +1,18 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist";
+import customChapterList from "../plugins/custom-chapter-plugin";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { options, onReady } = props;
-  const [currentChapter, setCurrentChapter] = useState(null);
+
+  useEffect(()=>{
+    //Register Chapter Plugin
+    videojs.registerPlugin("chapters", customChapterList);
+  },[])
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -21,6 +26,9 @@ export const VideoJS = (props) => {
         videojs.log("player is ready");
         onReady && onReady(player);
       }));
+
+      //Chapter Plugin
+      player.chapters(player, playerRef, options.chapters)
 
       // Adding button to the control bar
       var myButton = player.controlBar.addChild("button", {}, 0);
@@ -40,77 +48,12 @@ export const VideoJS = (props) => {
 
       // Add playlist functionality
       player.playlist(options.playlist);
-
+      
       // Load the playlist
       player.playlist.currentItem(0); // Start playing the first video in the playlist
 
       // You could update an existing player in the `else` block here
-      // on prop change, for example:
-
-      var chaptersArray = [
-        { label: "Chapter 1", time: "0" },
-        { label: "Chapter 2", time: "2" },
-        { label: "Chapter 3", time: "4" },
-      ];
-
-      // Initialize the chapters manually
-      const chapterMarkers = chaptersArray.map((chapter) => {
-        return {
-          text: chapter.label,
-          time: chapter.time,
-        };
-      });
-
-      // Chapter navigation logic
-      player.on("timeupdate", () => {
-        const currentTime = player.currentTime();
-
-        // Find the current chapter based on currentTime
-        let currentChapter = null;
-        for (const chapter of chapterMarkers) {
-          if (currentTime >= chapter.time) {
-            currentChapter = chapter;
-          } else {
-            break;
-          }
-        }
-
-        // Update current chapter state
-        setCurrentChapter(currentChapter);
-      });
-
-      // Adding chapters to select box
-// Adding chapters to custom select box
-const selectBoxContainer = document.createElement("div");
-selectBoxContainer.classList.add("custom-select-container");
-const selectBox = document.createElement("select");
-
-const chapterOptions = chaptersArray.map((chapter, index) => {
-  return {
-    value: index.toString(),
-    text: chapter.label,
-  };
-});
-
-chapterOptions.forEach((option) => {
-  const opt = document.createElement("option");
-  opt.value = option.value;
-  opt.text = option.text;
-  selectBox.appendChild(opt);
-});
-
-selectBox.onchange = function () {
-  const selectedChapterIndex = parseInt(this.value, 10);
-  if (!isNaN(selectedChapterIndex)) {
-    const selectedChapter = chapterMarkers[selectedChapterIndex];
-    if (selectedChapter) {
-      player.currentTime(selectedChapter.time);
-    }
-  }
-};
-
-selectBoxContainer.appendChild(selectBox);
-playerRef.current.controlBar.el().appendChild(selectBoxContainer);
+      // on prop change, for example:      
     } else {
       const player = playerRef.current;
 
@@ -133,14 +76,6 @@ playerRef.current.controlBar.el().appendChild(selectBoxContainer);
   return (
     <div data-vjs-player>
       <div ref={videoRef} />
-      <div>
-        {currentChapter && (
-          <div className="custom-chapter-display">
-            <h4>Current Chapter:</h4>
-            <p>{currentChapter.text}</p>
-          </div>
-        )}
-      </div>
       <div>
         <h3>Playlist</h3>
         <ul>
