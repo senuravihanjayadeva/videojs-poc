@@ -78,6 +78,39 @@ export const VideoJS = (props) => {
         // Update current chapter state
         setCurrentChapter(currentChapter);
       });
+
+      // Adding chapters to select box
+// Adding chapters to custom select box
+const selectBoxContainer = document.createElement("div");
+selectBoxContainer.classList.add("custom-select-container");
+const selectBox = document.createElement("select");
+
+const chapterOptions = chaptersArray.map((chapter, index) => {
+  return {
+    value: index.toString(),
+    text: chapter.label,
+  };
+});
+
+chapterOptions.forEach((option) => {
+  const opt = document.createElement("option");
+  opt.value = option.value;
+  opt.text = option.text;
+  selectBox.appendChild(opt);
+});
+
+selectBox.onchange = function () {
+  const selectedChapterIndex = parseInt(this.value, 10);
+  if (!isNaN(selectedChapterIndex)) {
+    const selectedChapter = chapterMarkers[selectedChapterIndex];
+    if (selectedChapter) {
+      player.currentTime(selectedChapter.time);
+    }
+  }
+};
+
+selectBoxContainer.appendChild(selectBox);
+playerRef.current.controlBar.el().appendChild(selectBoxContainer);
     } else {
       const player = playerRef.current;
 
