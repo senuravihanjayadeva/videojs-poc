@@ -12,12 +12,12 @@ import "../plugins/custom-chapter-seekbar.css";
 
 import SampleVideo360 from "../videos/sample360.mp4";
 import SampleVideo720 from "../videos/sample720.mp4";
+import customVideoQualityChanger from "../plugins/video-quality-plugin";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { options, onReady } = props;
-  const [selectedQuality, setSelectedQuality] = useState("720p"); // Default quality
 
   useEffect(() => {
     //Register Custom Chapter Plugin
@@ -28,6 +28,8 @@ export const VideoJS = (props) => {
     videojs.registerPlugin("playlists", customPlaylist);
     //Register Custom Playlist Popup Plugin
     videojs.registerPlugin("playlistPopup", playlistPopup);
+    //Register Custom Video Quality Change Plugin
+    videojs.registerPlugin("customVideoQualityChanger", customVideoQualityChanger);
   }, []);
 
   useEffect(() => {
@@ -56,6 +58,19 @@ export const VideoJS = (props) => {
       //Use Custom Playlist Popup Plugin
       //player.playlistPopup(player, playerRef, options.playlist);
 
+      const sources = [
+        {
+          "source": SampleVideo360,
+          "quality": "360p"
+        },
+        {
+          "source": SampleVideo720,
+          "quality": "720p"
+        }
+      ]
+      
+      player.customVideoQualityChanger(player, playerRef,sources)
+
       // Add event listener to handle quality change
       // player.on("resolutionchange", () => {
       //   const currentResolution = player.currentResolution();
@@ -80,42 +95,9 @@ export const VideoJS = (props) => {
     };
   }, [playerRef]);
 
-  const handleQualityChange = (quality) => {
-    console.log(quality)
-    const player = playerRef.current;
-    // const currentResolution = player.currentResolution();
-    const source = getSourceForResolution(quality);
-    console.log(source)
-    player.src(source);
-    setSelectedQuality(quality);
-  };
-
-  const getSourceForResolution = (resolution) => {
-    // Map resolutions to video source URLs
-    const sources = {
-      "360p": SampleVideo360,
-      "720p": SampleVideo720,
-      "1080p": "video_1080p.mp4",
-    };
-
-    return sources[resolution];
-  };
-
   return (
     <div data-vjs-player>
       <div ref={videoRef} />
-
-      <div className="quality-switcher">
-        <label>Quality:</label>
-        <select
-          value={selectedQuality}
-          onChange={(e) => handleQualityChange(e.target.value)}
-        >
-          <option value="360p">360p</option>
-          <option value="720p">720p</option>
-          <option value="1080p">1080p</option>
-        </select>
-      </div>
     </div>
   );
 };
