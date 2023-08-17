@@ -9,9 +9,12 @@
     "@viostream/videojs-chapters": "^0.0.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "video.js": "^8.3.0"
+    "video.js": "^8.3.0",
+    "videojs-playlist": "^5.1.0",
+    "videojs-playlist-ui": "^5.0.0",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import 'videojs-playlist';
 
 export const VideoJS = (props) => {
-  const videoRef = React.useRef(null);
-  const playerRef = React.useRef(null);
-  const {options, onReady} = props;
+  const videoRef = useRef(null);
+  const playerRef = useRef(null);
+  const { options, onReady } = props;
 
-  React.useEffect(() => {
-
+  useEffect(() => {
     // Make sure Video.js player is only initialized once
     if (!playerRef.current) {
-      // The Video.js player needs to be _inside_ the component el for React 18 Strict Mode. 
-      const videoElement = document.createElement("video-js");
-
+      const videoElement = document.createElement('video-js');
       videoElement.classList.add('vjs-big-play-centered');
       videoRef.current.appendChild(videoElement);
 
@@ -22,8 +20,14 @@ export const VideoJS = (props) => {
         onReady && onReady(player);
       });
 
-    // You could update an existing player in the `else` block here
-    // on prop change, for example:
+      // Add playlist functionality
+      player.playlist(options.playlist);
+
+      // Load the playlist
+      player.playlist.currentItem(0); // Start playing the first video in the playlist
+
+      // You could update an existing player in the `else` block here
+      // on prop change, for example:
     } else {
       const player = playerRef.current;
 
@@ -32,8 +36,7 @@ export const VideoJS = (props) => {
     }
   }, [options, videoRef]);
 
-  // Dispose the Video.js player when the functional component unmounts
-  React.useEffect(() => {
+  useEffect(() => {
     const player = playerRef.current;
 
     return () => {
@@ -46,9 +49,19 @@ export const VideoJS = (props) => {
 
   return (
     <div data-vjs-player>
-      <div ref={videoRef} />
+      <div ref={videoRef}/>
+      <div>
+        <ul>
+          {options.playlist.map((item, index) => (
+            <li key={index} onClick={() => playerRef.current.playlist.currentItem(index)}>
+              <h3>{item.title}</h3>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-}
+};
 
 export default VideoJS;
+
