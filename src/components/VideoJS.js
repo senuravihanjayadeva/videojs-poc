@@ -3,16 +3,17 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-playlist";
 import customChapterList from "../plugins/custom-chapter-plugin";
+import "../plugins/custom-chapter-plugin.css";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { options, onReady } = props;
 
-  useEffect(()=>{
+  useEffect(() => {
     //Register Chapter Plugin
     videojs.registerPlugin("chapters", customChapterList);
-  },[])
+  }, []);
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -28,7 +29,7 @@ export const VideoJS = (props) => {
       }));
 
       //Chapter Plugin
-      player.chapters(player, playerRef, options.chapters)
+      player.chapters(player, playerRef, options.chapters);
 
       // Adding button to the control bar
       var myButton = player.controlBar.addChild("button", {}, 0);
@@ -48,12 +49,12 @@ export const VideoJS = (props) => {
 
       // Add playlist functionality
       player.playlist(options.playlist);
-      
+
       // Load the playlist
       player.playlist.currentItem(0); // Start playing the first video in the playlist
 
       // You could update an existing player in the `else` block here
-      // on prop change, for example:      
+      // on prop change, for example:
     } else {
       const player = playerRef.current;
 

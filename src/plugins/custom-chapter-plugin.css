@@ -1,0 +1,19 @@
+/* Add your other styles here for chapter box*/
+
+.custom-select-container {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.custom-select-container select {
+  padding: 4px;
+  font-size: 12px;
+  margin: 2px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* You can adjust the styles as needed */
