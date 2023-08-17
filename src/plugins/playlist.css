@@ -1,0 +1,14 @@
+.playlist-popup-panel {
+  /* display: none; */
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  text-align: left;
+}
+
+.popup-div-grid{
+    background-color: aliceblue;
+    color: #000000;
+    font-size: large;
+}

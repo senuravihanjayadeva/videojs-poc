@@ -4,6 +4,8 @@ import "video.js/dist/video-js.css";
 import customChapterList from "../plugins/custom-chapter-plugin";
 import "../plugins/custom-chapter-plugin.css";
 import customPlaylist from "../plugins/playlist-plugin";
+import playlistPopup from "../plugins/playlist-popup-plugin";
+import "../plugins/playlist.css";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
@@ -15,12 +17,15 @@ export const VideoJS = (props) => {
     videojs.registerPlugin("chapters", customChapterList);
     //Register Custom Playlist Plugin
     videojs.registerPlugin("playlists", customPlaylist);
+    //Register Custom Playlist Popup Plugin
+    videojs.registerPlugin("playlistPopup", playlistPopup);
   }, []);
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
     if (!playerRef.current) {
       const videoElement = document.createElement("video-js");
+      videoElement.id = "video-js";
       videoElement.classList.add("video-js");
       videoElement.classList.add("vjs-big-play-centered");
       videoRef.current.appendChild(videoElement);
@@ -35,7 +40,8 @@ export const VideoJS = (props) => {
 
       //Use Custom Playlist Plugin
       player.playlists(player, playerRef, options.playlist);
-      
+
+      player.playlistPopup(player, playerRef, options.playlist);
     } else {
       const player = playerRef.current;
 

@@ -1,8 +1,4 @@
-export default function customChapterList(
-  player,
-  playerRef,
-  chaptersArray
-) {
+export default function customChapterList(player, playerRef, chaptersArray) {
   const selectBoxContainer = document.createElement("div");
   selectBoxContainer.classList.add("custom-select-container");
   const selectBox = document.createElement("select");
