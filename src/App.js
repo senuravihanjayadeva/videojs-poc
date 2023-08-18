@@ -95,12 +95,13 @@ const App = () => {
   ];
 
   const videoJsOptions = {
-    playlist: playlist,
+    // playlist: playlist,
     autoplay: true,
     controls: true,
     responsive: true,
     poster: SampleImage,
-    playbackRates: [0.5, 1, 1.5, 2],
+    language: 'pt', // Set the language to Spanish
+    playbackRates: [0.5, 1, 1.5, 2, 2.5,3],
     controlBar: {
       skipButtons: {
         backward: 10,

@@ -9,6 +9,7 @@ import playlistPopup from "../plugins/playlist-popup-plugin";
 import "../plugins/playlist.css";
 import "../plugins/custom-chapter-seekbar.css";
 import customVideoQualityChanger from "../plugins/video-quality-plugin";
+import customLanguageSupport from "../plugins/custom-language-support";
 
 export const VideoJS = (props) => {
   const videoRef = useRef(null);
@@ -29,6 +30,11 @@ export const VideoJS = (props) => {
       "customVideoQualityChanger",
       customVideoQualityChanger
     );
+    //Register Custom Language Support Plugin
+    videojs.registerPlugin(
+      "customLanguageSupport",
+      customLanguageSupport
+    );
   }, []);
 
   useEffect(() => {
@@ -46,20 +52,22 @@ export const VideoJS = (props) => {
       }));
 
       //Use Custom Chapter Plugin
-      //player.chapters(player, playerRef, options.sources[0].chapters);
+      player.chapters(player, playerRef, options.sources[0].chapters);
 
       //Use Custom Chapter in Seekbar Plugin
-      //player.customChaptersInSeekbar(player, options.sources[0].chapters);
-      
+      player.customChaptersInSeekbar(player, options.sources[0].chapters);
+
       //Use Custom Playlist Plugin
-      player.playlists(player, playerRef, options.playlist);
+      // player.playlists(player, playerRef, options.playlist);
 
       //Use Custom Playlist Popup Plugin
-      player.playlistPopup(player, playerRef, options.playlist);
-      
+      // player.playlistPopup(player, playerRef, options.playlist);
+
       //Use Custom Video Quality Plugin
       player.customVideoQualityChanger(player, playerRef, options.sources);
 
+      //Use Custom Language Support Plugin
+      player.customLanguageSupport(playerRef)
     } else {
       const player = playerRef.current;
 
