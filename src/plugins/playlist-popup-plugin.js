@@ -13,11 +13,11 @@ export default function playlistPopup(player, playerRef, list) {
   // Create the popup element
   let popup = document.createElement("div");
   popup.id = "popup-panel";
-  popup.className = "playlist-popup-panel";
+  popup.className = "playlist-popup-panel custom-row";
 
   list.forEach((item, index) => {
     let divGrid = document.createElement("div");
-    divGrid.className = "popup-div-grid";
+    divGrid.className = "popup-div-grid custom-col";
     let paragraph = document.createElement("p");
     paragraph.innerHTML = item.title;
     // Append the paragraphs to the popup element

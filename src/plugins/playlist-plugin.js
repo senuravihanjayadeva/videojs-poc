@@ -28,10 +28,6 @@ export default function customPlaylist(player, playerRef, list) {
         playerRef,
         list[selectedIndex].sources[0].chapters
       );
-      // player.customChaptersInSeekbar(
-      //   player,
-      //   list[selectedIndex].sources[0].chapters
-      // );
     }
 
     playerRef.current.playlist.currentItem(selectedIndex);
