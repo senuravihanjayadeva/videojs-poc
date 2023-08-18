@@ -104,6 +104,7 @@ const App = () => {
     controlBar: {
       skipButtons: {
         backward: 10,
+        forward: 10,
       },
     },
     fluid: true,

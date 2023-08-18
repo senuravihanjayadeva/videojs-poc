@@ -23,6 +23,13 @@ export default function playlistPopup(player, playerRef, list) {
     // Append the paragraphs to the popup element
     divGrid.appendChild(paragraph);
     divGrid.onclick = () => {
+      
+      //This is for chapter select box plugin
+      if (item.sources[0].chapters) {
+        player.chapters(player, playerRef, item.sources[0].chapters);
+      }
+      //End of This is for chapter select box plugin
+
       playerRef.current.playlist.currentItem(index);
       popup.remove();
       return false;

@@ -1,8 +1,7 @@
 import "video.js/dist/video-js.css";
 
 export default function customChaptersInSeekbar(player, chaptersArray) {
-  const selectBoxContainer = document.createElement("div");
-  selectBoxContainer.classList.add("custom-select-container");
+  // Query all elements with the class "chapter-marker" within the container
 
   // Initialize the chapters manually
   const chapterMarkers = chaptersArray.map((chapter) => {
@@ -21,11 +20,10 @@ export default function customChaptersInSeekbar(player, chaptersArray) {
   player.on("loadedmetadata", function () {
     const duration = player.duration(); // Total video duration in seconds
 
-    chapterMarkers.forEach((chapter) => {
+    chapterMarkers.forEach((chapter,index) => {
       const marker = document.createElement("div");
       marker.classList.add("chapter-marker");
-      let mark = (chapter.time / duration) * 100 + "%";
-      console.log(mark);
+      marker.id = `chapter-marker-${index}`
       marker.style.left = (chapter.time / duration) * 100 + "%";
 
       // Create tooltip for chapter label

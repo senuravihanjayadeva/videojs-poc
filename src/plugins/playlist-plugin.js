@@ -11,7 +11,7 @@ export default function customPlaylist(player, playerRef, list) {
   selectBoxContainer.classList.add("custom-select-container");
   const selectBox = document.createElement("select");
 
-  list.forEach((option,index) => {
+  list.forEach((option, index) => {
     const opt = document.createElement("option");
     opt.value = index;
     opt.text = option.title;
@@ -20,10 +20,21 @@ export default function customPlaylist(player, playerRef, list) {
 
   selectBox.onchange = function () {
     const selectedIndex = parseInt(this.value, 10);
-    if(list[selectedIndex].sources[0].chapters){
-      player.chapters(player, playerRef, list[selectedIndex].sources[0].chapters);
+
+    //This is for chapter select box plugin
+    if (list[selectedIndex].sources[0].chapters) {
+      player.chapters(
+        player,
+        playerRef,
+        list[selectedIndex].sources[0].chapters
+      );
+      // player.customChaptersInSeekbar(
+      //   player,
+      //   list[selectedIndex].sources[0].chapters
+      // );
     }
-    playerRef.current.playlist.currentItem(selectedIndex)
+
+    playerRef.current.playlist.currentItem(selectedIndex);
   };
 
   selectBoxContainer.appendChild(selectBox);
